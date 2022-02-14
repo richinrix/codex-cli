@@ -1,13 +1,33 @@
 #!/usr/bin/env node
 import chalk from "chalk";
 // import chalkAnimation from "chalk-animation";
-// import figlet from "figlet";
+import figlet from "figlet";
 import inquirer from "inquirer";
 // import { createSpinner } from "nanospinner";
 
-const alphabets = "abcdefghijklmnopqrstuvwxyz";
 const lowerASCIICode = "a".charCodeAt(0);
 const upperASCIICode = "z".charCodeAt(0);
+function displayTitle() {
+  let title = chalk.red("CODEX");
+  figlet.text(
+    "CODE-X",
+    {
+      font: "ANSI Shadow",
+      horizontalLayout: "default",
+      verticalLayout: "default",
+      width: 80,
+      whitespaceBreak: true,
+    },
+    function (err, data) {
+      if (err) {
+        console.log("Something went wrong...");
+        console.dir(err);
+        return;
+      }
+      console.log(data);
+    }
+  );
+}
 async function inputs() {
   // inputting words
   let word1 = await inquirer.prompt({
@@ -88,4 +108,11 @@ async function inputs() {
   );
   return;
 }
-await inputs();
+
+function main() {
+  displayTitle();
+  setTimeout(() => {
+    inputs();
+  }, 100);
+}
+main();
